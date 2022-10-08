@@ -26,6 +26,8 @@ extern "C" {
     pub async fn connected(url: String) -> Result<JsValue, JsValue>;
     #[wasm_bindgen(js_name = invokeShowTables, catch)]
     pub async fn show_tables(url: String) -> Result<JsValue, JsValue>;
+    #[wasm_bindgen(js_name = invokeLoadDatasource, catch)]
+    pub async fn load_datasource() -> Result<JsValue, JsValue>;
 }
 
 #[wasm_bindgen]
@@ -43,6 +45,10 @@ pub fn app() -> Html {
 
     // Execute tauri command via effects.
     // The effect will run every time `name` changes.
+    {
+        let url = url.clone();
+        update_url_state(url);
+    }
     {
         let welcome = welcome.clone();
         use_effect_with_deps(
@@ -107,16 +113,15 @@ fn update_welcome_message(welcome: UseStateHandle<String>, name: String) {
     spawn_local(async move {
         // This will call our glue code all the way through to the tauri
         // back-end command and return the `Result<String, String>` as
-        // `Result<JsValue, JsValue>`.
         match hello(name).await {
             Ok(message) => {
                 welcome.set(message.as_string().unwrap());
             }
             Err(e) => {
-                let window = window().unwrap();
-                window
-                    .alert_with_message(&format!("Error: {:?}", e))
-                    .unwrap();
+                // let window = window().unwrap();
+                // window
+                //     .alert_with_message(&format!("Error: {:?}", e))
+                //     .unwrap();
             }
         }
     });
@@ -129,10 +134,10 @@ fn update_connected_state(state: UseStateHandle<String>, url: String) {
                 state.set(message.as_string().unwrap());
             }
             Err(e) => {
-                let window = window().unwrap();
-                window
-                    .alert_with_message(&format!("Error: {:?}", e))
-                    .unwrap();
+                // let window = window().unwrap();
+                // window
+                //     .alert_with_message(&format!("Error: {:?}", e))
+                //     .unwrap();
             }
         }
     })
@@ -145,10 +150,26 @@ fn update_tables_state(state: UseStateHandle<wasm_bindgen::JsValue>, url: String
                 state.set(message);
             }
             Err(e) => {
-                let window = window().unwrap();
-                window
-                    .alert_with_message(&format!("Error: {:?}", e))
-                    .unwrap();
+                // let window = window().unwrap();
+                // window
+                //     .alert_with_message(&format!("Error: {:?}", e))
+                //     .unwrap();
+            }
+        }
+    })
+}
+
+fn update_url_state(state: UseStateHandle<String>) {
+    spawn_local (async move {
+        match load_datasource().await {
+            Ok(url) => {
+                state.set(url.as_string().unwrap());
+            }
+            Err(e) => {
+                // let window = window().unwrap();
+                // window
+                //     .alert_with_message(&format!("error: source could not loaded: {:?}", e))
+                //     .unwrap();
             }
         }
     })

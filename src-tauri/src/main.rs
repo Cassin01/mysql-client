@@ -12,15 +12,16 @@ pub use crate::mysql::utils::connect;
 pub use crate::mysql::utils::Pool;
 pub use crate::mysql::utils as sql;
 
-// #[tauri::command]
-// fn load_datasource() -> Result<String, String> {
-//     // This is a very simplistic example but it shows how to return a Result
-//     // and use it in the front-end.
-//     match conf::load_source() {
-//         Ok(url) => Ok(url),
-//         Err(e) => Err(e.to_string()),
-//     }
-// }
+#[tauri::command]
+fn load_datasource() -> Result<String, String> {
+    // This is a very simplistic example but it shows how to return a Result
+    // and use it in the front-end.
+    let cnf = conf::load_source();
+    match cnf {
+        Ok(url) => Ok(url),
+        Err(e) => Err(e.to_string()),
+    }
+}
 
 #[tauri::command]
 fn hello(name: &str) -> Result<String, String> {
@@ -37,9 +38,10 @@ fn hello(name: &str) -> Result<String, String> {
 async fn connected(url: &str, pool: State<'_, Pool>) -> Result<String, String> {
     // This is a very simplistic example but it shows how to return a Result
     // and use it in the front-end.
-    match conf::load_source() {
-        Ok(url) =>  {
-            match connect(&url).await {
+
+    // match conf::load_source() {
+    //     Ok(url) =>  {
+            match connect(url).await {
                 Ok(p) => {
                     let mut pool = pool.0.lock().await;
                     *pool = Some(p);
@@ -47,11 +49,11 @@ async fn connected(url: &str, pool: State<'_, Pool>) -> Result<String, String> {
                 }
                 Err(_) => Err("connection failed".to_string()),
             }
-        }
-        Err(e) => {
-            Err(e.to_string())
-        }
-    }
+        // }
+        // Err(e) => {
+        //     Err(e.to_string())
+        // }
+    // }
 }
 
 #[tauri::command]
@@ -70,9 +72,9 @@ async fn show_tables(url: &str, pool: State<'_, Pool>) -> Result<Vec<String>, St
                 // None => Err("not connect".to_string()),
         }
     }
-    match conf::load_source() {
-        Ok(url) =>  {
-            match connect(&url).await {
+    // match conf::load_source() {
+    //     Ok(url) =>  {
+            match connect(url).await {
                 Ok(p) => {
                     let mut pool = pool.0.lock().await;
                     *pool = Some(p.clone());
@@ -83,17 +85,17 @@ async fn show_tables(url: &str, pool: State<'_, Pool>) -> Result<Vec<String>, St
                 }
                 Err(_) => Err("connection failed".to_string()),
             }
-        }
-        Err(e) => {
-            Err(e.to_string())
-        }
-    }
+        // }
+        // Err(e) => {
+        //     Err(e.to_string())
+        // }
+    // }
 }
 
 fn main() {
     tauri::Builder::default()
         .manage(Pool(Default::default()))
-        .invoke_handler(tauri::generate_handler![hello, connected, show_tables])
+        .invoke_handler(tauri::generate_handler![hello, connected, show_tables, load_datasource])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
