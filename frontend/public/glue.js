@@ -11,7 +11,3 @@ export async function invokeConnected(url) {
 export async function invokeShowTables(url) {
   return await invoke("show_tables", {url: url})
 }
-
-export async function invokeLoadDatasource() {
-  return await invoke("load_datasource", {})
-}

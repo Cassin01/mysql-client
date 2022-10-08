@@ -26,8 +26,6 @@ extern "C" {
     pub async fn connected(url: String) -> Result<JsValue, JsValue>;
     #[wasm_bindgen(js_name = invokeShowTables, catch)]
     pub async fn show_tables(url: String) -> Result<JsValue, JsValue>;
-    #[wasm_bindgen(js_name = invokeShowTables, catch)]
-    pub fn load_datasource() -> Result<JsValue, JsValue>;
 }
 
 #[wasm_bindgen]
@@ -39,12 +37,6 @@ extern "C" {
 pub fn app() -> Html {
     let welcome = use_state_eq(|| "".to_string());
     let url = use_state_eq(|| "".to_string());
-    // let url = use_state_eq(|| if let Ok(s) = load_datasource() {s.as_string().unwrap()} else {String::from("")});
-    // {
-    //     let url = url.clone();
-    //     update_url_state(url);
-    // }
-    // alert(&url);
     let name = use_state_eq(|| "client".to_string());
     let connect = use_state_eq(|| "404".to_string());
     let tables = use_state_eq(|| wasm_bindgen::JsValue::from_str("hoge"));
@@ -161,19 +153,3 @@ fn update_tables_state(state: UseStateHandle<wasm_bindgen::JsValue>, url: String
         }
     })
 }
-// fn update_url_state(state: usestatehandle<string>) -> string {
-//     spawn_local (async move {
-//         match load_datasource().await {
-//             ok(url) => {
-//                 url.as_string().unwrap();
-//             }
-//             err(e) => {
-//                 let window = window().unwrap();
-//                 window
-//                     .alert_with_message(&format!("error: {:?}", e))
-//                     .unwrap();
-//                 string::from("")
-//             }
-//         }
-//     }).await.unwrap();
-// }
