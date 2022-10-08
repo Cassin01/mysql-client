@@ -42,13 +42,13 @@ pub fn app() -> Html {
     let name = use_state_eq(|| "client".to_string());
     let connect = use_state_eq(|| "404".to_string());
     let tables = use_state_eq(|| wasm_bindgen::JsValue::from_str("hoge"));
-
-    // Execute tauri command via effects.
-    // The effect will run every time `name` changes.
     {
         let url = url.clone();
         update_url_state(url);
     }
+
+    // Execute tauri command via effects.
+    // The effect will run every time `name` changes.
     {
         let welcome = welcome.clone();
         use_effect_with_deps(
