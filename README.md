@@ -5,9 +5,7 @@
 
 
 <!-- ref https://github.com/DenverCoder1/custom-icon-badges -->
- <img src="https://custom-icon-badges.demolab.com/badge/tauri-9cf.svg?logo=tauri&logoColor=white">
-  <img src="https://custom-icon-badges.demolab.com/badge/yew-brightgreen.svg?logo=yew&logoColor=white">
-  <img src="https://custom-icon-badges.demolab.com/badge/bootstrap-purple.svg?logo=bootstrap&logoColor=white">
+ <img src="https://custom-icon-badges.demolab.com/badge/tauri-9cf.svg?logo=tauri&logoColor=white"> <img src="https://custom-icon-badges.demolab.com/badge/yew-brightgreen.svg?logo=yew&logoColor=white"> <img src="https://custom-icon-badges.demolab.com/badge/bootstrap-purple.svg?logo=bootstrap&logoColor=white">
 ## usage
 
 Here, the same directory with README.md:
