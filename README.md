@@ -1,10 +1,7 @@
 # mysql client
 
 **I do not recommend to use this software if you are not `Cassin01`.**
-- `Cassin01/mysql-client` is under development.
-- `Cassin01/mysql-client` is created for `Cassin01`'s personal use.
-
-
+**`Cassin01/mysql-client` is under development.**
 
 ## usage
 
