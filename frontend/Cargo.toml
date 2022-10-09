@@ -12,3 +12,5 @@ wasm-bindgen-futures = "0.4.33"
 web-sys = "0.3.60"
 yew = "0.19.3"
 gloo-utils = {verson="0.1", features=["serde"]}
+log = "0.4.17"
+wasm-logger = "0.2.0"

@@ -12,6 +12,9 @@ export async function invokeShowTables(url) {
   return await invoke("show_tables", {url: url})
 }
 
+export async function invokeAddTable(url, tblname) {
+  return await invoke("add_table", {url: url, tblname: tblname})
+}
 export async function invokeLoadDatasource() {
   return await invoke("load_datasource", {})
 }

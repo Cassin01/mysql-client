@@ -5,6 +5,9 @@ use yew::prelude::*;
 mod components;
 use components::database::database_list::DatabaseList;
 use components::database::types::Database;
+use components::database::database_form::DatabaseForm;
+use components::header::Header;
+use components::connection::Connection;
 
 macro_rules! post_inc {
     ($i:ident) => {{
@@ -15,6 +18,7 @@ macro_rules! post_inc {
 }
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     yew::start_app::<App>();
 }
 
@@ -26,6 +30,8 @@ extern "C" {
     pub async fn connected(url: String) -> Result<JsValue, JsValue>;
     #[wasm_bindgen(js_name = invokeShowTables, catch)]
     pub async fn show_tables(url: String) -> Result<JsValue, JsValue>;
+    #[wasm_bindgen(js_name = invokeAddTable, catch)]
+    pub async fn add_table(url: String, tblname: String) -> Result<JsValue, JsValue>;
     #[wasm_bindgen(js_name = invokeLoadDatasource, catch)]
     pub async fn load_datasource() -> Result<JsValue, JsValue>;
 }
@@ -98,13 +104,40 @@ pub fn app() -> Html {
         dlist = vec![];
     }
 
+    let on_add = {
+        Callback::from(move |tbl_name: String| {
+            // add_table(url.clone().to_string(), tbl_name);
+            // log::info!("on_add: {:?}", tbl_name);
+            call_add_table(url.clone().to_string(), tbl_name);
+            {
+                let tables = tables.clone();
+                update_tables_state(tables, url.to_string());
+            }
+        })
+    };
+
     html! {
         <div>
-            <h2 class={"heading"}>{message}</h2>
-            <p>{"Connection: "}{m_connect}</p>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+            <Header />
+            <Connection connection={m_connect} />
+            </div>
+        </nav>
+            // <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            // <li class="nav-item"><Connection connection={m_connect} /></li>
+            // </ul> 
+        </nav>
+            // <h2 class={"heading"}>{message}</h2>
+            // {"Connection: "} <span class="badge bg-success" >{m_connect}</span>
+            // <span class="badge badge-light">{"9"}</span>
 
-            <h3>{"Table List"}</h3>
+            <main class="container-fluid mt-2">
+            <DatabaseForm {on_add} />
+            // <h3>{"Table List"}</h3>
             <DatabaseList database_list={dlist}/>
+            </main>
          </div>
     }
 }
@@ -170,6 +203,23 @@ fn update_url_state(state: UseStateHandle<String>) {
                 // window
                 //     .alert_with_message(&format!("error: source could not loaded: {:?}", e))
                 //     .unwrap();
+            }
+        }
+    })
+}
+
+fn  call_add_table(url: String, tbl_name: String) {
+    spawn_local(async move {
+        match add_table(url, tbl_name).await {
+            Ok(message) => {
+                log::info!("on_add message: {:?}", message);
+            }
+            Err(e) => {
+                log::warn!("on_add message: {:?}", e);
+                let window = window().unwrap();
+                window
+                    .alert_with_message(&format!("Error: {:?}", e))
+                    .unwrap();
             }
         }
     })

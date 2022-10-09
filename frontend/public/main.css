@@ -7,3 +7,23 @@ body {
 .heading {
     text-align: center;
 }
+
+.led-green {
+  margin: 0 auto;
+  margin-left: 5px;
+  width: 12px;
+  height: 12px;
+  background-color: #ABFF00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -0.5px 3.5px 0.5px, inset #304701 0 -0.5px 4.5px, #89FF00 0 1px 6px;
+}
+
+.led-red {
+  margin: 0 auto;
+  margin-left: 2px;
+  width: 12px;
+  height: 12px;
+  background-color: #F00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -0.5px 3.5px 0.5px, inset #441313 0 -0.5px 4.5px, rgba(255, 0, 0, 0.5) 0 1px 6px;
+}
