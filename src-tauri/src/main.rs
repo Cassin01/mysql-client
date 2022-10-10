@@ -105,7 +105,7 @@ async fn show_items(
     url: &str,
     tblname: &str,
     pool: State<'_, Pool>,
-) -> Result<Vec<String>, String> {
+) -> Result<Vec<Vec<String>>, String> {
     {
         let pool = pool.0.lock().await;
         match pool.clone() {

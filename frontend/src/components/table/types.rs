@@ -1,4 +1,4 @@
 #[derive(PartialEq, Clone, Debug)]
 pub struct Table {
-    pub name: String,
+    pub name: Vec<String>,
 }

@@ -126,7 +126,7 @@ pub fn app() -> Html {
         dlist = vec![];
     }
     let tlist: Vec<Table>;
-    if let Ok(tbl_list) = is.into_serde::<Vec<String>>() {
+    if let Ok(tbl_list) = is.into_serde::<Vec<Vec<String>>>() {
         tlist = tbl_list
             .into_iter()
             .map(|name| Table { name: name.clone() })
