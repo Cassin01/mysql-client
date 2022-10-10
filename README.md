@@ -15,15 +15,16 @@
 </a>
 
 ## Usage
-
+<details>
 Here, the same directory with README.md:
 
 ```sh
 $ cargo tauri dev
 ```
+</details>
 
-## Setting
-
+<h2> Setting </h2>
+<details>
 The configuration file will be automatically generated on:
 
 - Linux: `~/.config/c01_mysql_client`
@@ -42,15 +43,19 @@ dbms = 'mysql'           # e.g. 'mysql'
 ```
 
 </details>
+</details>
 
 
 ## Reference
-[dev](https://dev.to/stevepryde/create-a-desktop-app-in-rust-using-tauri-and-yew-2bhe)
+<details>
+- [Dev](https://dev.to/stevepryde/create-a-desktop-app-in-rust-using-tauri-and-yew-2bhe)
+</details>
 
 ---
 
 ## Todo
 
+<details>
 - [ ] connectの更新イベントを起こす`use` or `event (such as onclick)`
 - [x] テーブルの追加
     - [x] テーブルの選択
@@ -58,9 +63,10 @@ dbms = 'mysql'           # e.g. 'mysql'
     - [ ] テーブルの削除
 - [ ] テーブルへの要素追加
     - [ ] テーブルの要素の削除
+</details>
 
 ## Dev log
-
+<details>
 <details>
     <summary>テーブルの選択</summary>
 <img src="https://github.com/Cassin01/mysql-client/blob/ee2744d13034dd6e7c41a4a85a9f23f160afe1a8/asset/02.png" width="400">
@@ -69,4 +75,5 @@ dbms = 'mysql'           # e.g. 'mysql'
 <details>
     <summary>接続状況の表示, テーブルの追加フォーム</summary>
 <img src="https://github.com/Cassin01/mysql-client/blob/a4b29bd9bf0a8018b6a7fbb25ddf8ce66f0f2fc2/asset/01.png" width="400">
+</details>
 </details>
