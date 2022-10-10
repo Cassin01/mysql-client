@@ -22,6 +22,28 @@ Here, the same directory with README.md:
 $ cargo tauri dev
 ```
 
+## Setting
+
+The configuration file will be automatically generated on:
+
+- Linux: `~/.config/c01_mysql_client`
+- Windows: `{FOLDERID_RoamingAppData}\c01_mysql_client`
+- Mac OS: `~/Library/Preferences/rs.c01_mysql_client`
+
+<details>
+<summary>toml</summary>
+
+```toml
+user = 'user name'       # e.g. 'root'
+pass = 'password'
+dbname = 'database name' # e.g. 'my_schema'
+protocol = 'protocol'    # e.g. 'localhost:3306'
+dbms = 'mysql'           # e.g. 'mysql'
+```
+
+</details>
+
+
 ## Reference
 [dev](https://dev.to/stevepryde/create-a-desktop-app-in-rust-using-tauri-and-yew-2bhe)
 
