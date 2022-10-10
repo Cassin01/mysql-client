@@ -15,12 +15,12 @@
 </a>
 </p>
 
-## WARN
+### 🚧WARN🚧
 
 **I do not recommend using this software.**  
 **`Cassin01/mysql-client` is under development.**
 
-## Usage
+### Usage
 <details>
 Here, the same directory with README.md:
 
@@ -29,7 +29,7 @@ $ cargo tauri dev
 ```
 </details>
 
-<h2> Setting </h2>
+### Setting
 <details>
 The configuration file will be automatically generated on:
 
@@ -52,14 +52,14 @@ dbms = 'mysql'           # e.g. 'mysql'
 </details>
 
 
-## Reference
+### Reference
 <details>
 - [Dev](https://dev.to/stevepryde/create-a-desktop-app-in-rust-using-tauri-and-yew-2bhe)
 </details>
 
 ---
 
-## Todo
+### Todo
 
 <details>
 - [ ] connectの更新イベントを起こす`use` or `event (such as onclick)`
@@ -71,7 +71,7 @@ dbms = 'mysql'           # e.g. 'mysql'
     - [ ] テーブルの要素の削除
 </details>
 
-## Dev log
+### Dev log
 <details>
 <details>
     <summary>テーブルの選択</summary>
