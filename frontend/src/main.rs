@@ -165,14 +165,16 @@ pub fn app() -> Html {
             </nav>
 
             if let Some(name) = m_tbl {
-                <main class="container-fluid mt-2">
-                    <nav aria-label="breadcrumb">
+                    <nav aria-label="breadcrumb" class="navbar-light bg-light pt-1">
+                        <div class="container-fluid">
                     <ol class="breadcrumb">
                     // <li class="breadcrumb-item"><a href="#">{"Home"}</a></li>
                     <TableClear on_tbl_clear={on_tbl_select} />
                     <li class="breadcrumb-item active" aria-current="page">{name}</li>
                     </ol>
+                    </div>
                     </nav>
+                <main class="container-fluid mt-2">
                     // <div class="mb-1 row justify-content-between">
                     //     <div class="col-auto">
                     //     {name}
@@ -185,6 +187,14 @@ pub fn app() -> Html {
                     <TableList table_list={tlist} />
                 </main>
             } else {
+                    <nav aria-label="breadcrumb" class="navbar-light bg-light pt-1">
+                        <div class="container-fluid">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">{"Home"}</a></li>
+                    // <li class="breadcrumb-item active" aria-current="page">{name}</li>
+                    </ol>
+                        </div>
+                    </nav>
                 <main class="container-fluid mt-2">
                     <DatabaseForm {on_add} />
                     <DatabaseList database_list={dlist} on_tbl_select={on_tbl_select} />

@@ -1,6 +1,6 @@
 # Mysql Client
 
-**I do not recommend using this software if you are not `Cassin01`.**
+**I do not recommend using this software.**  
 **`Cassin01/mysql-client` is under development.**
 
 <!-- ref https://github.com/DenverCoder1/custom-icon-badges -->
