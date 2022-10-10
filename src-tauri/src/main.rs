@@ -50,11 +50,7 @@ async fn connected(url: &str, pool: State<'_, Pool>) -> Result<String, String> {
 }
 
 #[tauri::command]
-async fn add_table(
-    url: &str,
-    tblname: &str,
-    pool: State<'_, Pool>,
-) -> Result<Vec<String>, String> {
+async fn add_table(url: &str, tblname: &str, pool: State<'_, Pool>) -> Result<Vec<String>, String> {
     // println!("add_table {}", tblname);
     {
         let pool = pool.0.lock().await;
@@ -63,7 +59,7 @@ async fn add_table(
                 Ok(tables) => return Ok(tables),
                 Err(e) => return Err(e.to_string()),
             },
-            None => (), 
+            None => (),
         }
     }
     match connect(url).await {
@@ -74,7 +70,7 @@ async fn add_table(
                 Ok(tables) => return Ok(tables),
                 Err(e) => return Err(e.to_string()),
             }
-        },
+        }
         Err(_) => Err("connection failed".to_string()),
     }
 }
@@ -104,6 +100,35 @@ async fn show_tables(url: &str, pool: State<'_, Pool>) -> Result<Vec<String>, St
     }
 }
 
+#[tauri::command]
+async fn show_items(
+    url: &str,
+    tblname: &str,
+    pool: State<'_, Pool>,
+) -> Result<Vec<String>, String> {
+    {
+        let pool = pool.0.lock().await;
+        match pool.clone() {
+            Some(p) => match sql::show_items(&p, tblname).await {
+                Ok(tables) => return Ok(tables),
+                Err(e) => return Err(e.to_string()),
+            },
+            None => (), // None => Err("not connect".to_string()),
+        }
+    }
+    match connect(url).await {
+        Ok(p) => {
+            let mut pool = pool.0.lock().await;
+            *pool = Some(p.clone());
+            match sql::show_items(&p, tblname).await {
+                Ok(tables) => return Ok(tables),
+                Err(e) => return Err(e.to_string()),
+            }
+        }
+        Err(_) => Err("connection failed".to_string()),
+    }
+}
+
 fn main() {
     tauri::Builder::default()
         .manage(Pool(Default::default()))
@@ -111,6 +136,7 @@ fn main() {
             hello,
             connected,
             show_tables,
+            show_items,
             add_table,
             load_datasource
         ])

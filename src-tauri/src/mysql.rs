@@ -47,12 +47,43 @@ pub mod utils {
         tbl_name: &str,
     ) -> Result<Vec<String>, sqlx::Error> {
         // println!("add table {}", tbl_name);
+        if tbl_name.len() == 0 {
+            return Err(sqlx::Error::RowNotFound);
+        }
         let tables = sqlx::query(&("CREATE TABLE if not exists ".to_owned() + tbl_name + " (id int, name varchar(10))"))
             .fetch_all(pool)
             .await?;
 
         // println!("{:?}", tables);
         Ok(tables.iter().map(|row| row.try_get(0).unwrap()).collect())
+    }
+    pub async fn show_items(
+        pool: &sqlx::MySqlPool,
+        tbl_name: &str,
+    ) -> Result<Vec<String>, sqlx::Error> {
+        // println!("add table {}", tbl_name);
+        if tbl_name.len() == 0 {
+            return Err(sqlx::Error::RowNotFound);
+        }
+        let tables = sqlx::query(&("show columns from ".to_owned() + tbl_name))
+            .fetch_all(pool)
+            .await?;
+        let col_names: Vec<&str> = tables.iter().map(|row| row.try_get(0).unwrap()).collect();
+
+        let tables = sqlx::query(&("select * from ".to_owned() + tbl_name))
+            .fetch_all(pool)
+            .await?;
+
+        let mut result = vec![col_names.clone().join(" | ")]; //vec![];
+        for r in tables.into_iter() {
+            let mut row_result: Vec<String> = Vec::new();
+            for col in col_names.iter() {
+                let value: String = if let Ok(v) = r.try_get(col) { v } else { String::from("non") };
+                row_result.push(value);
+            }
+            result.push(row_result.join(" | "));
+        }
+        Ok(result)
     }
 
     use tokio::sync::Mutex;

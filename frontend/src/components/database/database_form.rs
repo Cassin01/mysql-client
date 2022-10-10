@@ -33,15 +33,22 @@ pub fn database_form(props: &DatabaseFormProps) -> Html {
         })
     };
     html! {
-        <form class="mb-5">
-            <div class="mb-3">
-                <label for="title" class="form-label">{"Table"}</label>
+        <form class="mb-2">
+            // <div class="mb-1">
+            <div class="mb-1 row">
+                <div class="col-auto">
+                <label for="title" class="col-form-label">{"Table name"}</label>
+                </div>
+                <div class="col-auto">
                 <input type="text" value={(*tbl_name).clone()} oninput={oninput} class="form-control" id="tbl_name" />
+                </div>
+                <div class="col-auto">
+                <button type="submit" onclick={onclick} class="btn btn-secondary">{"Add"}</button>
+                </div>
             </div>
             // <div class="mb-3">
             //     {&*tbl_name}
             // </div>
-            <button type="submit" onclick={onclick} class="btn btn-primary">{"Add"}</button>
         </form>
     }
 }

@@ -31,10 +31,11 @@ $ cargo tauri dev
 
 - [ ] connectの更新イベントを起こす`use` or `event (such as onclick)`
 - [x] テーブルの追加
-    - [ ] テーブルの要素も選択できるようにする
+    - [x] テーブルの要素も選択できるようにする
     - [ ] ポップアップにする
-- [ ] テーブルを選択できるようにする
-    - [ ] テーブルに加えられるようにする。
+    - [ ] テーブルの削除
+- [ ] テーブルへの要素追加
+    - [ ] テーブルの要素の削除
 
 ## Dev log
 
@@ -44,4 +45,3 @@ $ cargo tauri dev
 <img src="https://github.com/Cassin01/mysql-client/blob/a4b29bd9bf0a8018b6a7fbb25ddf8ce66f0f2fc2/asset/01.png" width="400">
 
 </details>
-

@@ -1,10 +1,11 @@
 use crate::components::database::database_item::DatabaseItem;
 use crate::components::database::types::Database;
-use yew::{function_component, html, Html, Properties};
+use yew::{function_component, html, Html, Properties, Callback};
 
 #[derive(Properties, PartialEq)]
 pub struct DatabaseListProps {
-    pub database_list: Vec<Database>
+    pub database_list: Vec<Database>,
+    pub on_tbl_select: Callback<Option<String>>,
 }
 
 #[function_component(DatabaseList)]
@@ -24,10 +25,12 @@ pub fn database_list(props: &DatabaseListProps) -> Html {
     //     },
 
     // ];
+    let database_list = props.database_list.clone();
+    let on_tbl_select = &props.on_tbl_select;
     html! {
         <ul class="list-group">
-        {props.database_list.iter().map(|database| html! {
-            <DatabaseItem id={database.id} name={database.name.clone()} />
+        {database_list.iter().map(|database| html! {
+            <DatabaseItem id={database.id} name={database.name.clone()} on_tbl_select={on_tbl_select} />
         }).collect::<Html>()}
         </ul>
     }
