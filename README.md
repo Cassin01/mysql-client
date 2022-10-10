@@ -1,12 +1,20 @@
-# mysql client
+# Mysql Client
 
-**I do not recommend to use this software if you are not `Cassin01`.**
+**I do not recommend using this software if you are not `Cassin01`.**
 **`Cassin01/mysql-client` is under development.**
 
-
 <!-- ref https://github.com/DenverCoder1/custom-icon-badges -->
- <img src="https://custom-icon-badges.demolab.com/badge/tauri-blue.svg?logo=tauri&logoColor=yellow"> <img src="https://custom-icon-badges.demolab.com/badge/yew-brightgreen.svg?logo=yew&logoColor=white"> <img src="https://custom-icon-badges.demolab.com/badge/bootstrap-purple.svg?logo=bootstrap&logoColor=white">
-## usage
+<a href="https://tauri.app">
+<img src="https://custom-icon-badges.demolab.com/badge/tauri-blue.svg?logo=tauri&logoColor=yellow">
+</a>
+<a href="https://yew.rs">
+<img src="https://custom-icon-badges.demolab.com/badge/yew-brightgreen.svg?logo=yew&logoColor=white">
+</a>
+<a href="https://getbootstrap.com">
+<img src="https://custom-icon-badges.demolab.com/badge/bootstrap-purple.svg?logo=bootstrap&logoColor=white">
+</a>
+
+## Usage
 
 Here, the same directory with README.md:
 
@@ -28,7 +36,7 @@ $ cargo tauri dev
 - [ ] テーブルを選択できるようにする
     - [ ] テーブルに加えられるようにする。
 
-## dev log
+## Dev log
 
 <details>
     <summary>接続状況の表示, テーブルの追加フォーム</summary>
