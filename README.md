@@ -1,8 +1,8 @@
-# Mysql Client
+<h1 align="center">C01 MySQL Client</h1>
 
-**I do not recommend using this software.**  
-**`Cassin01/mysql-client` is under development.**
+<p align="center">MySQL client for daily use.</p>
 
+<p align="center">
 <!-- ref https://github.com/DenverCoder1/custom-icon-badges -->
 <a href="https://tauri.app">
 <img src="https://custom-icon-badges.demolab.com/badge/tauri-blue.svg?logo=tauri&logoColor=yellow">
@@ -13,6 +13,12 @@
 <a href="https://getbootstrap.com">
 <img src="https://custom-icon-badges.demolab.com/badge/bootstrap-purple.svg?logo=bootstrap&logoColor=white">
 </a>
+</p>
+
+## WARN
+
+**I do not recommend using this software.**  
+**`Cassin01/mysql-client` is under development.**
 
 ## Usage
 <details>
